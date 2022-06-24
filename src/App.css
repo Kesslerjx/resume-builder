@@ -1,1 +1,42 @@
+:root {
+  --dark-blue: #152238;
+}
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-blue);
+  color: white;
+  font-size: 2rem;
+  padding: 20px 0 ;
+  letter-spacing: 0.2rem;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.header-button {
+  width: 100px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  padding: 2px 0;
+}
+
+.button-selected {
+  background-color: white;
+  color: var(--dark-blue);
+  border-radius: 2px;
+  font-weight: bold;
+}
