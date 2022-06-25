@@ -1,11 +1,11 @@
-import './App.css';
+import './styles/App.css';
 import React from 'react';
 import Info from './components/Info';
 import Preview from './components/Preview';
 
 const Page = {
-  Info: 'i',
-  Preview: 'p'
+  Info: 'info-button',
+  Preview: 'preview-button'
 }
 
 class App extends React.Component {
@@ -15,6 +15,19 @@ class App extends React.Component {
 
     this.state = {
       page: Page.Info,
+      resume: {
+        general: {name: "", email: "",location: "",number: ""}
+      },
+      functions: {
+        nameChanged: (event) => {
+          let copy = {...this.state.resume};
+          copy.general.name = event.target.value;
+      
+          this.setState({
+            resume: copy
+          })
+        }
+      }
     }
 
     this.buttonPressed = this.buttonPressed.bind(this);
@@ -27,8 +40,8 @@ class App extends React.Component {
         <header className="app-header">
           <p>Resume Builder</p>
           <div className="header-buttons">
-            <button className="header-button button-selected" id="info-button" onClick={this.buttonPressed}>Info</button>
-            <button className="header-button" id="preview-button" onClick={this.buttonPressed}>Preview</button>
+            <button className="header-button button-selected" id={Page.Info} onClick={this.buttonPressed}>Info</button>
+            <button className="header-button" id={Page.Preview} onClick={this.buttonPressed}>Preview</button>
           </div>
         </header>
         <main>
@@ -41,18 +54,22 @@ class App extends React.Component {
   getPage() {
     switch(this.state.page) {
       default: 
-        return (<Info />);
+        return (<Info resume={this.state.resume} functions={this.state.functions}/>);
       case Page.Preview:
         return (<Preview />);
     }
   }
 
   buttonPressed(event) {
-    this.setState({
-      page: this.otherPage(),
-    })
 
-    this.selectButton(event.target);
+    if(event.target.id !== this.state.page) {
+      this.setState({
+        page: this.otherPage(),
+      })
+  
+      this.selectButton(event.target);
+    }
+
   }
 
   otherPage() {

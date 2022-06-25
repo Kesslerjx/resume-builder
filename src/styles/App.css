@@ -40,3 +40,8 @@ p {
   border-radius: 2px;
   font-weight: bold;
 }
+
+main {
+  display: flex;
+  justify-content: center;
+}
