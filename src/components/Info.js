@@ -10,11 +10,11 @@ class Info extends React.Component {
 
     render() {
 
-        const { resume, functions } = this.props;
+        const { resume, updateResume } = this.props;
 
         return (
             <div className='info-wrapper'>
-                <General general={resume.general} functions={functions}/>
+                <General resume={resume} updateResume={updateResume}/>
             </div>
         )
     }

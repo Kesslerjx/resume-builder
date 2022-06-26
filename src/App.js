@@ -17,21 +17,18 @@ class App extends React.Component {
       page: Page.Info,
       resume: {
         general: {name: "", email: "",location: "",number: ""}
-      },
-      functions: {
-        nameChanged: (event) => {
-          let copy = {...this.state.resume};
-          copy.general.name = event.target.value;
-      
-          this.setState({
-            resume: copy
-          })
-        }
       }
     }
 
     this.buttonPressed = this.buttonPressed.bind(this);
     this.getPage       = this.getPage.bind(this);
+    this.updateResume  = this.updateResume.bind(this);
+  }
+
+  updateResume(copy) {
+    this.setState({
+      resume: copy
+    })
   }
 
   render() {
@@ -54,7 +51,7 @@ class App extends React.Component {
   getPage() {
     switch(this.state.page) {
       default: 
-        return (<Info resume={this.state.resume} functions={this.state.functions}/>);
+        return (<Info resume={this.state.resume} updateResume={this.updateResume}/>);
       case Page.Preview:
         return (<Preview />);
     }
