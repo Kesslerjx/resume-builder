@@ -16,7 +16,8 @@ class App extends React.Component {
     this.state = {
       page: Page.Info,
       resume: {
-        general: {name: "", email: "",location: "",number: ""}
+        general: {name: "", email: "",location: "",number: ""},
+        skills : []
       }
     }
 
@@ -53,7 +54,7 @@ class App extends React.Component {
       default: 
         return (<Info resume={this.state.resume} updateResume={this.updateResume}/>);
       case Page.Preview:
-        return (<Preview />);
+        return (<Preview resume={this.state.resume}/>);
     }
   }
 

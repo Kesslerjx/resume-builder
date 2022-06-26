@@ -12,8 +12,8 @@ class General extends React.Component {
                 <p className='section-title'>General</p>
                 <input value={general.name} onChange={(e) => this.updateName(e)} type="text" placeholder='Name' className='section-input'></input>
                 <input value={general.email} onChange={(e) => this.updateEmail(e)} type="email" placeholder='Email' className='section-input'></input>
-                <input value={general.location} onChange={(e) => this.updateLocation(e)} type="text" placeholder='Location' className='section-input'></input>
                 <input value={general.number} onChange={(e) => this.updateNumber(e)} type="text" placeholder='Number' className='section-input'></input>
+                <input value={general.location} onChange={(e) => this.updateLocation(e)} type="text" placeholder='Location' className='section-input'></input>
             </div>
         )
     }

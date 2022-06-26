@@ -1,6 +1,9 @@
 .info-wrapper {
     flex-basis: 500px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .section-wrapper {
