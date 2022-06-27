@@ -19,3 +19,21 @@
 .input-button-wrapper > button:active {
     font-weight: bold;
 }
+
+.skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.skill-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-wrapper > div {
+    display: flex;
+    gap: 10px;
+}
