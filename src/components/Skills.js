@@ -74,7 +74,7 @@ class Skills extends React.Component {
     }
 
     removeSkill(event) {
-        let index = this.getSkillIndex(event);
+        let index   = getIndexInNodes(event.target.parentElement.parentElement, document.querySelector('.skills-wrapper'));
         let copy  = this.props.resume;
         copy.skills.splice(index, 1);
         this.props.updateResume(copy);
