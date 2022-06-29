@@ -1,6 +1,7 @@
 :root {
   --dark-blue: #152238;
   --button-green: #227f3b;
+  --normal-shadow: 0px 0px 5px rgb(0 0 0 / 0.3);  
 }
 
 p {

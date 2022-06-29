@@ -2,11 +2,11 @@ import React from 'react';
 import '../styles/Info.css'
 import '../styles/Skills.css'
 import { v4 as uuidv4 } from 'uuid';
-
-const Direction = {
-    Up: 'u',
-    Down: 'd'
-}
+import upIcon from '../icons/up.svg';
+import downIcon from '../icons/down.svg';
+import deleteIcon from '../icons/delete.svg';
+import {moveTo, getIndexInNodes} from '../modules/array-functions.js';
+import {Direction} from './Info';
 
 class Skills extends React.Component {
 
@@ -19,10 +19,17 @@ class Skills extends React.Component {
     render() {
 
         const skills = this.props.resume.skills;
+        const moveSection = this.props.moveSection;
 
         return (
             <div className='section-wrapper'>
-                <p className='section-title'>Skills</p>
+                <div className='section-header'>
+                    <p className='section-title'>Skills</p>
+                    <div>
+                        <img alt="Move section up" src={upIcon} className="icon" onClick={(e) => moveSection(e, Direction.Up)}></img>
+                        <img alt="Move section down" src={downIcon} className="icon" onClick={(e) => moveSection(e, Direction.Down)}></img>
+                    </div>
+                </div>
                 <div className='input-button-wrapper'>
                     <input id='skill-name' type="text" placeholder='Skill' className='section-input'></input>
                     <button onClick={(e) => this.addSkill(e)}>Add</button>
@@ -51,28 +58,19 @@ class Skills extends React.Component {
             <div key={uuidv4()} className='skill-wrapper'>
                 <p>{skill}</p>
                 <div>
-                    <button onClick={(e) => this.moveSkill(e, Direction.Up)}>U</button>
-                    <button onClick={(e) => this.moveSkill(e, Direction.Down)}>D</button>
-                    <button onClick={(e) => this.removeSkill(e)}>X</button>
+                    <img alt="Move skill up" src={upIcon} className="icon" onClick={(e) => this.moveSkill(e, Direction.Up)}></img>
+                    <img alt="Move skill down" src={downIcon} className="icon" onClick={(e) => this.moveSkill(e, Direction.Down)}></img>
+                    <img alt="Delete skill" src={deleteIcon} className="icon" onClick={(e) => this.removeSkill(e)}></img>
                 </div>
             </div>
         )
     }
 
     moveSkill(event, direction) {
-
-        let index    = this.getSkillIndex(event);
-        let moveable = (direction === Direction.Up ? index > 0 : index < this.props.resume.skills.length);
-
-        if(moveable) {
-            let skill = this.props.resume.skills[index];
-            let copy  = this.props.resume;
-
-            copy.skills.splice(index, 1);
-            copy.skills.splice(direction === Direction.Up ? index-1 : index+1, 0, skill);
-
-            this.props.updateResume(copy);
-        }
+        let index   = getIndexInNodes(event.target.parentElement.parentElement, document.querySelector('.skills-wrapper'));
+        let copy    = this.props.resume; 
+        copy.skills = moveTo(index, index + direction, copy.skills);
+        this.props.updateResume(copy);
     }
 
     removeSkill(event) {
@@ -80,12 +78,6 @@ class Skills extends React.Component {
         let copy  = this.props.resume;
         copy.skills.splice(index, 1);
         this.props.updateResume(copy);
-    }
-
-    getSkillIndex(event) {
-        let skill  = event.target.parentElement.parentElement;
-        let nodes  = Array.from(document.querySelector('.skills-wrapper').childNodes);
-        return nodes.indexOf(skill);
     }
 }
 

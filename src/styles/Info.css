@@ -8,11 +8,17 @@
 
 .section-wrapper {
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgb(0 0 0 / 0.3);
+    box-shadow: var(--normal-shadow);
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .section-title {

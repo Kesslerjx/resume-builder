@@ -12,6 +12,7 @@ class Preview extends React.Component {
                 <p className='normal-text'>{this.getContactInformation(resume.general)}</p>
                 <p className='normal-text'>{resume.general.location === "" ? "Location here" : resume.general.location}</p>
                 <hr></hr>
+                {this.skillsSection(resume.skills)}
             </div>
         )
     }
@@ -21,6 +22,19 @@ class Preview extends React.Component {
         contact +=  general.email + (general.number === "" ? "" : ` | ${general.number}`);
         return (contact === "" ? "Contact information here" : contact);
     }
+
+    skillsSection(skills) {
+        if(skills.length > 0) {
+            return (
+                <>
+                <p className='large-text'>Skills</p>
+                <p className='normal-text'>{skills.join(', ')}</p>
+                <hr></hr>
+                </>
+            )
+        }
+    }
+
 }
 
 export default Preview;

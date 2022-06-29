@@ -8,6 +8,11 @@ const Page = {
   Preview: 'preview-button'
 }
 
+const Section = {
+  Skills: 's',
+  Certifications: 'c'
+}
+
 class App extends React.Component {
 
   constructor() {
@@ -17,18 +22,30 @@ class App extends React.Component {
       page: Page.Info,
       resume: {
         general: {name: "", email: "",location: "",number: ""},
-        skills : []
-      }
+        skills : [],
+        certifications: []
+      },
+      order: [
+        Section.Skills,
+        Section.Certifications
+    ]
     }
 
     this.buttonPressed = this.buttonPressed.bind(this);
     this.getPage       = this.getPage.bind(this);
     this.updateResume  = this.updateResume.bind(this);
+    this.updateOrder   = this.updateOrder.bind(this);
   }
 
   updateResume(copy) {
     this.setState({
       resume: copy
+    })
+  }
+
+  updateOrder(newOrder) {
+    this.setState({
+      order: newOrder
     })
   }
 
@@ -52,9 +69,16 @@ class App extends React.Component {
   getPage() {
     switch(this.state.page) {
       default: 
-        return (<Info resume={this.state.resume} updateResume={this.updateResume}/>);
+        return (
+          <Info 
+            resume={this.state.resume} 
+            updateResume={this.updateResume} 
+            order={this.state.order}
+            updateOrder={this.updateOrder}
+          />
+        );
       case Page.Preview:
-        return (<Preview resume={this.state.resume}/>);
+        return (<Preview resume={this.state.resume} order={this.state.order}/>);
     }
   }
 
@@ -83,3 +107,4 @@ class App extends React.Component {
 }
 
 export default App;
+export { Section };

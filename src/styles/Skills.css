@@ -37,3 +37,13 @@
     display: flex;
     gap: 10px;
 }
+
+.icon {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.icon:hover {
+    filter: invert(36%) sepia(17%) saturate(1810%) hue-rotate(84deg) brightness(103%) contrast(88%);
+}
