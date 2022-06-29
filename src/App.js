@@ -78,7 +78,12 @@ class App extends React.Component {
           />
         );
       case Page.Preview:
-        return (<Preview resume={this.state.resume} order={this.state.order}/>);
+        return (
+          <Preview 
+            resume={this.state.resume} 
+            order={this.state.order}
+          />
+        );
     }
   }
 
