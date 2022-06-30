@@ -13,7 +13,17 @@ class Skills extends React.Component {
     constructor(props) {
         super(props);
 
-        this.value = "";
+        this.state = {
+            value: ""
+        }
+
+        this.updateValue = this.updateValue.bind(this);
+    }
+
+    updateValue(newValue) {
+        this.setState({
+            value: newValue
+        })
     }
 
     render() {
@@ -31,7 +41,7 @@ class Skills extends React.Component {
                     </div>
                 </div>
                 <div className='input-button-wrapper'>
-                    <input id='skill-name' type="text" placeholder='Skill' className='section-input'></input>
+                    <input value={this.state.value} onChange={(e) => this.updateValue(e.target.value)} id='skill-name' type="text" placeholder='Skill' className='section-input'></input>
                     <button onClick={(e) => this.addSkill(e)}>Add</button>
                 </div>
                 <div className='skills-wrapper'>
@@ -42,14 +52,11 @@ class Skills extends React.Component {
     }
 
     addSkill() {
-
-        let input = document.querySelector('#skill-name');
-
-        if(input.value !== "") {
+        if(this.state.value !== "") {
             let copy  = this.props.resume;
-            copy.skills = [...this.props.resume.skills, input.value];
+            copy.skills = [...this.props.resume.skills, this.state.value];
             this.props.updateResume(copy);
-            input.value = "";
+            this.updateValue("");
         }
     }
 

@@ -35,6 +35,7 @@ class App extends React.Component {
     this.getPage       = this.getPage.bind(this);
     this.updateResume  = this.updateResume.bind(this);
     this.updateOrder   = this.updateOrder.bind(this);
+
   }
 
   updateResume(copy) {
