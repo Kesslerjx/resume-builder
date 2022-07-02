@@ -1,12 +1,14 @@
 
+
 function moveTo(oldIndex, toIndex, array) {
-    if(toIndex < 0 || toIndex > array.length-1) {
-        return array;
-    } else {
-        let copy = array;
-        copy.splice(toIndex, 0, copy.splice(oldIndex, 1)[0]);
-        return copy;
+
+    let newArray = structuredClone(array);
+
+    if(toIndex >= 0 || toIndex < array.length-1) {
+        newArray.splice(toIndex, 0, newArray.splice(oldIndex, 1)[0]);
     }
+
+    return newArray;
 }
 
 function getIndexInNodes(element, elementParent) {

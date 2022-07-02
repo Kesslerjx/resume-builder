@@ -25,19 +25,19 @@ class General extends React.Component {
     }
 
     updateEmail(event) {
-        let copy          = this.props.resume;
+        let copy           = this.props.resume;
         copy.general.email = event.target.value;
         this.props.updateResume(copy);
     }
 
     updateLocation(event) {
-        let copy          = this.props.resume;
+        let copy              = this.props.resume;
         copy.general.location = event.target.value;
         this.props.updateResume(copy);
     }
 
     updateNumber(event) {
-        let copy          = this.props.resume;
+        let copy            = this.props.resume;
         copy.general.number = event.target.value;
         this.props.updateResume(copy);
     }

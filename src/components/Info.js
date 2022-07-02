@@ -46,19 +46,17 @@ class Info extends React.Component {
                     key          ={uuidv4()} 
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}
-                    moveSection  = {this.moveSection}
+                    moveSection  ={this.moveSection}
                 />
         }
     }
 
     moveSection(event, direction) {
-        let index = getIndexInNodes(
-            event.target.parentElement.parentElement.parentElement,
-             document.querySelector('.info-wrapper')
-        ) - 1;
-        
-        let copy = this.props.order;
-        copy     = moveTo(index, index+direction, copy);
+        let target = event.target.parentElement.parentElement.parentElement;
+        let parent = target.parentElement;
+        let index  = getIndexInNodes(target, parent) - 1; //Subtract 1 so General isn't counted
+        let copy   = this.props.order;
+        copy       = moveTo(index, index+direction, copy);
         
         this.props.updateOrder(copy);
     }

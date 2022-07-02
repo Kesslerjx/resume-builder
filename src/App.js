@@ -28,7 +28,7 @@ class App extends React.Component {
       order: [
         Section.Skills,
         Section.Certifications
-    ]
+     ]
     }
 
     this.buttonPressed = this.buttonPressed.bind(this);
@@ -38,9 +38,9 @@ class App extends React.Component {
 
   }
 
-  updateResume(copy) {
+  updateResume(newResume) {
     this.setState({
-      resume: copy
+      resume: newResume
     })
   }
 

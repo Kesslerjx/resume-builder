@@ -9,6 +9,12 @@
     gap: 5px;
 }
 
+.resume-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 hr {
     width: 100%;
     border: none;

@@ -37,7 +37,7 @@ class Preview extends React.Component {
     skillsSection(skills) {
         if(skills.length > 0) {
             return (
-                <div key={uuidv4()}>
+                <div key={uuidv4()} className='resume-section'>
                 <p className='large-text'>Skills</p>
                 <p className='normal-text'>{skills.join(', ')}</p>
                 <hr></hr>
@@ -49,8 +49,17 @@ class Preview extends React.Component {
     certificationsSection(certifications) {
         if(certifications.length > 0) {
             return (
-                <div key={uuidv4()}>
+                <div key={uuidv4()} className='resume-section'>
                     <p className='large-text'>Certifications</p>
+                    <div className='resume-section'>
+                        {certifications.map((cert) => (
+                            <div key={uuidv4()} className='list-item-wrapper'>
+                                <p className='normal-text'>{cert.name}</p>
+                                <p className='normal-text'>{cert.expiration}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <hr></hr>
                 </div>
             )
         }
