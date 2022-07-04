@@ -6,6 +6,7 @@ import Certifications from './Certifications';
 import { v4 as uuidv4 } from 'uuid';
 import { Section } from '../App';
 import {moveTo, getIndexInNodes} from '../modules/array-functions.js';
+import Educations from './Educations';
 
 const Direction = {
     Up: -1,
@@ -43,6 +44,13 @@ class Info extends React.Component {
                 />
             case Section.Certifications:
                 return <Certifications 
+                    key          ={uuidv4()} 
+                    resume       ={this.props.resume} 
+                    updateResume ={this.props.updateResume}
+                    moveSection  ={this.moveSection}
+                />
+            case Section.Education:
+                return <Educations 
                     key          ={uuidv4()} 
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}

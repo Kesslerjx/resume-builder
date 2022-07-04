@@ -25,6 +25,8 @@ class Preview extends React.Component {
                 return this.skillsSection(this.props.resume.skills);
             case Section.Certifications:
                 return this.certificationsSection(this.props.resume.certifications);
+            case Section.Education:
+                return this.educationSection(this.props.resume.education);
         }
     }
 
@@ -56,6 +58,28 @@ class Preview extends React.Component {
                             <div key={uuidv4()} className='list-item-wrapper'>
                                 <p className='normal-text'>{cert.name}</p>
                                 <p className='normal-text'>{cert.expiration}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <hr></hr>
+                </div>
+            )
+        }
+    }
+
+    educationSection(education) {
+        if(education.length > 0) {
+            return (
+                <div key={uuidv4()} className='resume-section'>
+                    <p className='large-text'>Education</p>
+                    <div className='resume-section'>
+                        {education.map((edu) => (
+                            <div key={uuidv4()} className='list-item-wrapper'>
+                                <div>
+                                    <p className='normal-text'>{edu.degree}</p>
+                                    <p className='normal-text'>{edu.school}</p>
+                                </div>
+                                <p className='normal-text'>{edu.date}</p>
                             </div>
                         ))}
                     </div>

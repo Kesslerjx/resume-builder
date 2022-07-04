@@ -41,7 +41,7 @@ class Skills extends React.Component {
                 </div>
                 <div className='input-button-wrapper'>
                     <input value={this.state.value} onChange={(e) => this.updateValue(e )} id='skill-name' type="text" placeholder='Skill' className='section-input'></input>
-                    <button onClick={(e) => this.addSkill(e)}>Add</button>
+                    <button className='add-button' onClick={(e) => this.addSkill(e)}>Add</button>
                 </div>
                 <div className='list-wrapper'>
                     {skills.map(skill => this.getSkillDiv(skill))}

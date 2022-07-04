@@ -37,8 +37,8 @@ class Certifications extends React.Component {
                     <div className='multiple-inputs'>
                         <input value={this.state.certification} onChange={(e) => this.certificationChange(e)} type="text" placeholder='Certification' className='section-input'></input>
                         <input value={this.state.expiration} onChange={(e) => this.expirationChange(e)}type="text" placeholder='Expiration Date' className='section-input'></input>
+                        <button className='add-button' onClick={() => this.addCertification()}>Add</button>
                     </div>
-                    <button onClick={() => this.addCertification()}>Add</button>
                 </div>
                 <div className='list-wrapper'>
                     {certifications.map(cert => this.getCertElement(cert))}
