@@ -99,7 +99,6 @@ class Preview extends React.Component {
 
     experienceSection(experience, index) {
         if(experience.length > 0) {
-            console.log(experience);
             return (
                 <div key={uuidv4()} className='resume-section'>
                     <p className='large-text'>Experience</p>
