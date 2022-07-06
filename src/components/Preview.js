@@ -14,19 +14,21 @@ class Preview extends React.Component {
                 <p className='normal-text'>{this.getContactInformation(resume.general)}</p>
                 <p className='normal-text'>{resume.general.location === "" ? "Location here" : resume.general.location}</p>
                 <hr></hr>
-                {order.map(s => this.getSection(s))}
+                {order.map((s, index) => this.getSection(s, index))}
             </div>
         )
     }
 
-    getSection(section) {
+    getSection(section, index) {
         switch(section) {
             case Section.Skills:
-                return this.skillsSection(this.props.resume.skills);
+                return this.skillsSection(this.props.resume.skills, index);
             case Section.Certifications:
-                return this.certificationsSection(this.props.resume.certifications);
+                return this.certificationsSection(this.props.resume.certifications, index);
             case Section.Education:
-                return this.educationSection(this.props.resume.education);
+                return this.educationSection(this.props.resume.education, index);
+            default:
+                return this.experienceSection(this.props.resume.experience, index);
         }
     }
 
@@ -36,19 +38,21 @@ class Preview extends React.Component {
         return (contact === "" ? "Contact information here" : contact);
     }
 
-    skillsSection(skills) {
+    skillsSection(skills, index) {
         if(skills.length > 0) {
             return (
                 <div key={uuidv4()} className='resume-section'>
                 <p className='large-text'>Skills</p>
                 <p className='normal-text'>{skills.join(', ')}</p>
-                <hr></hr>
+                {
+                    (index !== this.props.order.length-1) ? <hr></hr>: <div></div>
+                }
                 </div>
             )
         }
     }
 
-    certificationsSection(certifications) {
+    certificationsSection(certifications, index) {
         if(certifications.length > 0) {
             return (
                 <div key={uuidv4()} className='resume-section'>
@@ -61,13 +65,15 @@ class Preview extends React.Component {
                             </div>
                         ))}
                     </div>
-                    <hr></hr>
+                    {
+                        (index !== this.props.order.length-1) ? <hr></hr>: <div></div>
+                    }
                 </div>
             )
         }
     }
 
-    educationSection(education) {
+    educationSection(education, index) {
         if(education.length > 0) {
             return (
                 <div key={uuidv4()} className='resume-section'>
@@ -83,7 +89,44 @@ class Preview extends React.Component {
                             </div>
                         ))}
                     </div>
-                    <hr></hr>
+                    {
+                        (index !== this.props.order.length-1) ? <hr></hr>: <div></div>
+                    }
+                </div>
+            )
+        }
+    }
+
+    experienceSection(experience, index) {
+        if(experience.length > 0) {
+            console.log(experience);
+            return (
+                <div key={uuidv4()} className='resume-section'>
+                    <p className='large-text'>Experience</p>
+                    <div className='resume-section'>
+                        {experience.map( (job, index) =>
+                            <div key={uuidv4()}>
+                                <div className='list-item-wrapper'>
+                                    <div>
+                                        <p className='normal-text'>{job.title}</p>
+                                        <p className='normal-text'>{job.name}</p>
+                                    </div>
+                                    <p className='normal-text'>{`${job.from} - ${job.to}`}</p>
+                                </div>
+                                <ul>
+                                    {job.tasks.map(task =>
+                                        <li key={uuidv4()} className='normal-text'>{task}</li>
+                                    )}
+                                </ul>
+                                {
+                                    (index !== experience.length-1) ? <br></br>: <div></div>
+                                }
+                            </div>
+                        )}
+                    </div>
+                    {
+                        (index !== this.props.order.length-1) ? <hr></hr>: <div></div>
+                    }
                 </div>
             )
         }

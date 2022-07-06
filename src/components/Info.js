@@ -3,15 +3,11 @@ import '../styles/Info.css';
 import General from './General';
 import Skills  from './Skills';
 import Certifications from './Certifications';
+import Experience from './Experience';
 import { v4 as uuidv4 } from 'uuid';
 import { Section } from '../App';
 import {moveTo, getIndexInNodes} from '../modules/array-functions.js';
 import Educations from './Educations';
-
-const Direction = {
-    Up: -1,
-    Down: 1
-}
 
 class Info extends React.Component {
 
@@ -56,6 +52,13 @@ class Info extends React.Component {
                     updateResume ={this.props.updateResume}
                     moveSection  ={this.moveSection}
                 />
+            default:
+                return <Experience 
+                    key          ={uuidv4()} 
+                    resume       ={this.props.resume} 
+                    updateResume ={this.props.updateResume}
+                    moveSection  ={this.moveSection}
+                />
         }
     }
 
@@ -71,4 +74,3 @@ class Info extends React.Component {
 }
 
 export default Info;
-export {Direction};

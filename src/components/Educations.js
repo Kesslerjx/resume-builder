@@ -1,12 +1,9 @@
 import React from 'react';
 import '../styles/Info.css';
-import upIcon from '../icons/up.svg';
-import downIcon from '../icons/down.svg';
-import deleteIcon from '../icons/delete.svg';
-import { Direction } from './Info';
-import { v4 as uuidv4 } from 'uuid';
 import { getIndexInNodes, moveTo } from '../modules/array-functions';
 import Education from '../modules/Education.js';
+import SectionHeader from './SectionHeader';
+import ListItem from './ListItem';
 
 class Educations extends React.Component {
 
@@ -18,6 +15,9 @@ class Educations extends React.Component {
             school: "",
             date: ""
         }
+
+        this.moveItem = this.moveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
     render() {
 
@@ -26,13 +26,7 @@ class Educations extends React.Component {
 
         return (
             <div className='section-wrapper'>
-                <div className='section-header'>
-                    <p className='section-title'>Education</p>
-                    <div>
-                        <img alt="Move section up" src={upIcon} className="icon" onClick={(e) => moveSection(e, Direction.Up)}></img>
-                        <img alt="Move section down" src={downIcon} className="icon" onClick={(e) => moveSection(e, Direction.Down)}></img>
-                    </div>
-                </div>
+                <SectionHeader title="Education" moveSection={moveSection} />
                 <div className='input-button-wrapper'>
                     <div className='multiple-inputs'>
                         <input value={this.state.degree} onChange={(e) => this.degreeChanged(e)} type="text" placeholder='Degree' className='section-input'></input>
@@ -42,27 +36,24 @@ class Educations extends React.Component {
                     </div>
                 </div>
                 <div className='list-wrapper'>
-                    {education.map(edu => this.getElement(edu))}
+                    {education.map(edu => this.getListItem(edu))}
                 </div>
             </div>
         )
     }
 
-    getElement(edu) {
-        return (
-            <div key={uuidv4()} className='list-item-wrapper'>
+    getListItem(edu) {
+        return <ListItem 
+            content={
                 <div>
                     <p>{edu.degree}</p>
                     <p>{edu.school}</p>
                     <p>{edu.date}</p>
                 </div>
-                <div className='list-item-buttons'>
-                    <img alt="Move education up" src={upIcon} className="icon" onClick={(e) => this.moveEdu(e, Direction.Up)}></img>
-                    <img alt="Move education down" src={downIcon} className="icon" onClick={(e) => this.moveEdu(e, Direction.Down)}></img>
-                    <img alt="Delete education" src={deleteIcon} className="icon" onClick={(e) => this.removeEdu(e)}></img>
-                </div>
-            </div>
-        )
+            }
+            moveItem={this.moveItem}
+            deleteItem={this.deleteItem}
+        />
     }
 
     getIndex(event) {
@@ -71,14 +62,14 @@ class Educations extends React.Component {
         return getIndexInNodes(target, parent);
     }
 
-    moveEdu(event, direction) {
+    moveItem(event, direction) {
         let index   = this.getIndex(event)
         let copy    = this.props.resume; 
         copy.education = moveTo(index, index + direction, copy.education);
         this.props.updateResume(copy);
     }
 
-    removeEdu(event) {
+    deleteItem(event) {
         let index  = this.getIndex(event)        
         let copy   = this.props.resume;
         copy.education.splice(index, 1);

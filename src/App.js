@@ -11,7 +11,8 @@ const Page = {
 const Section = {
   Skills: 's',
   Certifications: 'c',
-  Education: 'e'
+  Education: 'e',
+  Experience: 'ex'
 }
 
 class App extends React.Component {
@@ -25,12 +26,14 @@ class App extends React.Component {
         general: {name: "", email: "",location: "",number: ""},
         skills : [],
         certifications: [],
-        education: []
+        education: [],
+        experience: []
       },
       order: [
         Section.Skills,
         Section.Certifications,
-        Section.Education
+        Section.Education,
+        Section.Experience
      ]
     }
 

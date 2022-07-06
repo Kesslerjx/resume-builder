@@ -9,6 +9,10 @@ p {
   padding: 0;
 }
 
+ul {
+  margin: 2px;
+}
+
 .app-header {
   display: flex;
   flex-direction: column;

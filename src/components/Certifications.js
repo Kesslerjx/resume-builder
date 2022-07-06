@@ -1,12 +1,9 @@
 import React from 'react';
 import '../styles/Info.css';
-import upIcon from '../icons/up.svg';
-import downIcon from '../icons/down.svg';
-import deleteIcon from '../icons/delete.svg';
-import { Direction } from './Info';
 import Certification from '../modules/Certification.js';
-import { v4 as uuidv4 } from 'uuid';
 import { getIndexInNodes, moveTo } from '../modules/array-functions';
+import SectionHeader from './SectionHeader';
+import ListItem from './ListItem';
 
 class Certifications extends React.Component {
 
@@ -17,6 +14,9 @@ class Certifications extends React.Component {
             certification: "",
             expiration: ""
         }
+
+        this.moveItem   = this.moveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     render() {
@@ -26,13 +26,7 @@ class Certifications extends React.Component {
 
         return (
             <div className='section-wrapper'>
-                <div className='section-header'>
-                    <p className='section-title'>Certifications</p>
-                    <div>
-                        <img alt="Move section up" src={upIcon} className="icon" onClick={(e) => moveSection(e, Direction.Up)}></img>
-                        <img alt="Move section down" src={downIcon} className="icon" onClick={(e) => moveSection(e, Direction.Down)}></img>
-                    </div>
-                </div>
+                <SectionHeader title="Certifications" moveSection={moveSection} />
                 <div className='input-button-wrapper'>
                     <div className='multiple-inputs'>
                         <input value={this.state.certification} onChange={(e) => this.certificationChange(e)} type="text" placeholder='Certification' className='section-input'></input>
@@ -41,26 +35,23 @@ class Certifications extends React.Component {
                     </div>
                 </div>
                 <div className='list-wrapper'>
-                    {certifications.map(cert => this.getCertElement(cert))}
+                    {certifications.map(cert => this.getListItem(cert))}
                 </div>
             </div>
         )
     }
 
-    getCertElement(cert) {
-        return(
-            <div key={uuidv4()} className='list-item-wrapper'>
+    getListItem(cert) {
+        return <ListItem 
+            content={
                 <div>
                     <p>{`${cert.name}`}</p>
                     <p>{`Expiration: ${cert.expiration}`}</p>
                 </div>
-                <div className='list-item-buttons'>
-                <img alt="Move certification up" src={upIcon} className="icon" onClick={(e) => this.moveCert(e, Direction.Up)}></img>
-                    <img alt="Move certification down" src={downIcon} className="icon" onClick={(e) => this.moveCert(e, Direction.Down)}></img>
-                    <img alt="Delete certification" src={deleteIcon} className="icon" onClick={(e) => this.removeCert(e)}></img>
-                </div>
-            </div>
-        )
+            }
+            moveItem={this.moveItem}
+            deleteItem={this.deleteItem}
+        />
     }
 
     certificationChange(event) {
@@ -90,14 +81,14 @@ class Certifications extends React.Component {
         return getIndexInNodes(target, parent);
     }
 
-    moveCert(event, direction) {
+    moveItem(event, direction) {
         let index   = this.getIndex(event)
         let copy    = this.props.resume; 
         copy.certifications = moveTo(index, index + direction, copy.certifications);
         this.props.updateResume(copy);
     }
 
-    removeCert(event) {
+    deleteItem(event) {
         let index  = this.getIndex(event)        
         let copy   = this.props.resume;
         copy.certifications.splice(index, 1);
