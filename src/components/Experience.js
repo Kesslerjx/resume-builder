@@ -33,11 +33,11 @@ export default class Experience extends React.Component {
 
     render() {
 
-        const {resume, moveSection} = this.props;
+        const {resume, moveSection, index} = this.props;
 
         return (
             <div className='section-wrapper'>
-                <SectionHeader title="Experience" moveSection={moveSection} />
+                <SectionHeader title="Experience" moveSection={moveSection} index={index} />
                 <div className='input-button-wrapper'>
                     <div className='multiple-inputs'>
                         <input value={this.state.name} onChange={(e) => this.valueChanged(e)} type="text" placeholder={this.Placeholder.name} className='section-input'></input>
@@ -83,8 +83,7 @@ export default class Experience extends React.Component {
         this.props.updateResume(copy);
     }
 
-    deleteItem(event) {
-        let index  = this.getIndex(event)        
+    deleteItem(index) {    
         let copy   = this.props.resume;
         copy.experience.splice(index, 1);
         this.props.updateResume(copy);

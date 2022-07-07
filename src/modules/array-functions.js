@@ -4,7 +4,7 @@ function moveTo(oldIndex, toIndex, array) {
 
     let newArray = structuredClone(array);
 
-    if(toIndex >= 0 || toIndex < array.length-1) {
+    if(toIndex >= 0 && toIndex <= array.length-1) {
         newArray.splice(toIndex, 0, newArray.splice(oldIndex, 1)[0]);
     }
 

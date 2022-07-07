@@ -23,10 +23,11 @@ class Certifications extends React.Component {
 
         const certifications = this.props.resume.certifications;
         const moveSection    = this.props.moveSection;
+        const index          = this.props.index;
 
         return (
             <div className='section-wrapper'>
-                <SectionHeader title="Certifications" moveSection={moveSection} />
+                <SectionHeader title="Certifications" moveSection={moveSection} index={index} />
                 <div className='input-button-wrapper'>
                     <div className='multiple-inputs'>
                         <input value={this.state.certification} onChange={(e) => this.certificationChange(e)} type="text" placeholder='Certification' className='section-input'></input>
@@ -82,8 +83,7 @@ class Certifications extends React.Component {
         this.props.updateResume(copy);
     }
 
-    deleteItem(event) {
-        let index  = this.getIndex(event)        
+    deleteItem(index) {      
         let copy   = this.props.resume;
         copy.certifications.splice(index, 1);
         this.props.updateResume(copy);

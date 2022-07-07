@@ -17,7 +17,7 @@ export default class ListItem extends React.Component {
                 <div className='list-item-buttons'>
                     <img alt="Move item up" src={upIcon} className="icon" onClick={() => moveItem(index, Direction.Up)}></img>
                     <img alt="Move item down" src={downIcon} className="icon" onClick={() => moveItem(index, Direction.Down)}></img>
-                    <img alt="Delete item" src={deleteIcon} className="icon" onClick={(e) => deleteItem(e)}></img>
+                    <img alt="Delete item" src={deleteIcon} className="icon" onClick={() => deleteItem(index)}></img>
                 </div>
             </div>
         )

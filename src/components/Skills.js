@@ -29,10 +29,11 @@ class Skills extends React.Component {
 
         const skills = this.props.resume.skills;
         const moveSection = this.props.moveSection;
+        const index = this.props.index;
 
         return (
             <div className='section-wrapper'>
-                <SectionHeader title="Skills" moveSection={moveSection} />
+                <SectionHeader title="Skills" moveSection={moveSection} index={index} />
                 <div className='input-button-wrapper'>
                     <input value={this.state.value} onChange={(e) => this.updateValue(e )} id='skill-name' type="text" placeholder='Skill' className='section-input'></input>
                     <button className='add-button' onClick={(e) => this.addSkill(e)}>Add</button>
@@ -71,8 +72,7 @@ class Skills extends React.Component {
         this.props.updateResume(copy);
     }
 
-    deleteItem(event) {
-        let index  = this.getIndex(event)        
+    deleteItem(index) {     
         let copy   = this.props.resume;
         copy.skills.splice(index, 1);
         this.props.updateResume(copy);

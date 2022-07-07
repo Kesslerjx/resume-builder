@@ -6,7 +6,7 @@ import Certifications from './Certifications';
 import Experience from './Experience';
 import { v4 as uuidv4 } from 'uuid';
 import { Section } from '../App';
-import {moveTo, getIndexInNodes} from '../modules/array-functions.js';
+import {moveTo} from '../modules/array-functions.js';
 import Educations from './Educations';
 
 class Info extends React.Component {
@@ -24,12 +24,12 @@ class Info extends React.Component {
         return (
             <div className='info-wrapper'>
                 <General resume={resume} updateResume={updateResume}/>
-                {order.map(s => this.getSection(s))}
+                {order.map((s, index) => this.getSection(s, index))}
             </div>
         )
     }
 
-    getSection(section) {
+    getSection(section, index) {
         switch(section) {
             case Section.Skills: 
                 return <Skills 
@@ -37,6 +37,7 @@ class Info extends React.Component {
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}
                     moveSection  ={this.moveSection}
+                    index        ={index}
                 />
             case Section.Certifications:
                 return <Certifications 
@@ -44,6 +45,7 @@ class Info extends React.Component {
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}
                     moveSection  ={this.moveSection}
+                    index        ={index}
                 />
             case Section.Education:
                 return <Educations 
@@ -51,6 +53,7 @@ class Info extends React.Component {
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}
                     moveSection  ={this.moveSection}
+                    index        ={index}
                 />
             default:
                 return <Experience 
@@ -58,17 +61,14 @@ class Info extends React.Component {
                     resume       ={this.props.resume} 
                     updateResume ={this.props.updateResume}
                     moveSection  ={this.moveSection}
+                    index        ={index}
                 />
         }
     }
 
-    moveSection(event, direction) {
-        let target = event.target.parentElement.parentElement.parentElement;
-        let parent = target.parentElement;
-        let index  = getIndexInNodes(target, parent) - 1; //Subtract 1 so General isn't counted
+    moveSection(index, direction) {
         let copy   = this.props.order;
         copy       = moveTo(index, index+direction, copy);
-        
         this.props.updateOrder(copy);
     }
 }

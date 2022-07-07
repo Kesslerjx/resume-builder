@@ -21,12 +21,13 @@ class Educations extends React.Component {
     }
     render() {
 
-        const education = this.props.resume.education;
-        const moveSection    = this.props.moveSection;
+        const education   = this.props.resume.education;
+        const moveSection = this.props.moveSection;
+        const index       = this.props.index;
 
         return (
             <div className='section-wrapper'>
-                <SectionHeader title="Education" moveSection={moveSection} />
+                <SectionHeader title="Education" moveSection={moveSection} index={index}/>
                 <div className='input-button-wrapper'>
                     <div className='multiple-inputs'>
                         <input value={this.state.degree} onChange={(e) => this.degreeChanged(e)} type="text" placeholder='Degree' className='section-input'></input>
@@ -63,8 +64,7 @@ class Educations extends React.Component {
         this.props.updateResume(copy);
     }
 
-    deleteItem(event) {
-        let index  = this.getIndex(event)        
+    deleteItem(index) {   
         let copy   = this.props.resume;
         copy.education.splice(index, 1);
         this.props.updateResume(copy);
