@@ -1,8 +1,8 @@
-import React from 'react';
-import '../styles/Info.css'
-import {moveTo, getIndexInNodes} from '../modules/array-functions.js';
+import React         from 'react';
+import {moveTo }     from '../modules/array-functions.js';
 import SectionHeader from './SectionHeader';
-import ListItem from './ListItem';
+import ListItem      from './ListItem';
+import '../styles/Info.css'
 
 
 class Skills extends React.Component {
@@ -38,7 +38,7 @@ class Skills extends React.Component {
                     <button className='add-button' onClick={(e) => this.addSkill(e)}>Add</button>
                 </div>
                 <div className='list-wrapper'>
-                    {skills.map(skill => this.getListItem(skill))}
+                    {skills.map( (skill, index) => this.getListItem(skill, index))}
                 </div>
             </div>
         )
@@ -52,26 +52,20 @@ class Skills extends React.Component {
         }
     }
 
-    getListItem(skill) {
+    getListItem(skill, index) {
         return <ListItem 
             content={
                 <div>
                     <p>{skill}</p>
                 </div>
             }
-            moveItem={this.moveItem}
-            deleteItem={this.deleteItem}
+            moveItem   = {this.moveItem}
+            deleteItem = {this.deleteItem}
+            index      = {index}
         />
     }
 
-    getIndex(event) {
-        let target  = event.target.parentElement.parentElement;
-        let parent  = target.parentElement;
-        return getIndexInNodes(target, parent);
-    }
-
-    moveItem(event, direction) {
-        let index   = this.getIndex(event)
+    moveItem(index, direction) {
         let copy    = this.props.resume; 
         copy.skills = moveTo(index, index + direction, copy.skills);
         this.props.updateResume(copy);

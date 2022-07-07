@@ -1,9 +1,9 @@
-import React from 'react';
-import '../styles/Info.css';
-import { getIndexInNodes, moveTo } from '../modules/array-functions';
-import Education from '../modules/Education.js';
+import React         from 'react';
+import { moveTo }    from '../modules/array-functions';
+import Education     from '../modules/Education.js';
 import SectionHeader from './SectionHeader';
-import ListItem from './ListItem';
+import ListItem      from './ListItem';
+import '../styles/Info.css';
 
 class Educations extends React.Component {
 
@@ -36,13 +36,13 @@ class Educations extends React.Component {
                     </div>
                 </div>
                 <div className='list-wrapper'>
-                    {education.map(edu => this.getListItem(edu))}
+                    {education.map((edu, index) => this.getListItem(edu, index))}
                 </div>
             </div>
         )
     }
 
-    getListItem(edu) {
+    getListItem(edu, index) {
         return <ListItem 
             content={
                 <div>
@@ -51,19 +51,13 @@ class Educations extends React.Component {
                     <p>{edu.date}</p>
                 </div>
             }
-            moveItem={this.moveItem}
-            deleteItem={this.deleteItem}
+            moveItem   = {this.moveItem}
+            deleteItem = {this.deleteItem}
+            index      = {index}
         />
     }
 
-    getIndex(event) {
-        let target  = event.target.parentElement.parentElement;
-        let parent  = event.target.parentElement.parentElement.parentElement;
-        return getIndexInNodes(target, parent);
-    }
-
-    moveItem(event, direction) {
-        let index   = this.getIndex(event)
+    moveItem(index, direction) {
         let copy    = this.props.resume; 
         copy.education = moveTo(index, index + direction, copy.education);
         this.props.updateResume(copy);

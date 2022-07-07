@@ -1,9 +1,9 @@
-import React from 'react';
-import '../styles/Info.css';
+import React         from 'react';
 import Certification from '../modules/Certification.js';
-import { getIndexInNodes, moveTo } from '../modules/array-functions';
+import { moveTo }    from '../modules/array-functions';
 import SectionHeader from './SectionHeader';
-import ListItem from './ListItem';
+import ListItem      from './ListItem';
+import '../styles/Info.css';
 
 class Certifications extends React.Component {
 
@@ -35,13 +35,13 @@ class Certifications extends React.Component {
                     </div>
                 </div>
                 <div className='list-wrapper'>
-                    {certifications.map(cert => this.getListItem(cert))}
+                    {certifications.map( (cert,index) => this.getListItem(cert, index))}
                 </div>
             </div>
         )
     }
 
-    getListItem(cert) {
+    getListItem(cert, index) {
         return <ListItem 
             content={
                 <div>
@@ -49,8 +49,9 @@ class Certifications extends React.Component {
                     <p>{`Expiration: ${cert.expiration}`}</p>
                 </div>
             }
-            moveItem={this.moveItem}
-            deleteItem={this.deleteItem}
+            moveItem   ={this.moveItem}
+            deleteItem ={this.deleteItem}
+            index      = {index}
         />
     }
 
@@ -75,14 +76,7 @@ class Certifications extends React.Component {
         }
     }
 
-    getIndex(event) {
-        let target  = event.target.parentElement.parentElement;
-        let parent  = event.target.parentElement.parentElement.parentElement;
-        return getIndexInNodes(target, parent);
-    }
-
-    moveItem(event, direction) {
-        let index   = this.getIndex(event)
+    moveItem(index, direction) {
         let copy    = this.props.resume; 
         copy.certifications = moveTo(index, index + direction, copy.certifications);
         this.props.updateResume(copy);

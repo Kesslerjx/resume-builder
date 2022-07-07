@@ -1,10 +1,10 @@
-import React from 'react';
-import '../styles/Info.css';
+import React            from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { getIndexInNodes, moveTo } from '../modules/array-functions';
-import Job from '../modules/Job.js';
-import SectionHeader from './SectionHeader';
-import ListItem from './ListItem';
+import { moveTo }       from '../modules/array-functions';
+import Job              from '../modules/Job.js';
+import SectionHeader    from './SectionHeader';
+import ListItem         from './ListItem';
+import '../styles/Info.css';
 
 export default class Experience extends React.Component {
     constructor(props) {
@@ -57,13 +57,13 @@ export default class Experience extends React.Component {
                     </div>
                 </div>
                 <div className='list-wrapper'>
-                    {resume.experience.map(job => this.getListItem(job))}
+                    {resume.experience.map( (job, index) => this.getListItem(job, index))}
                 </div>
             </div>
         )
     }
 
-    getListItem(job) {
+    getListItem(job, index) {
         return <ListItem 
             content={
                 <div>
@@ -71,19 +71,13 @@ export default class Experience extends React.Component {
                     <p>{`${job.from} - ${job.to}`}</p>
                 </div>
             }
-            moveItem={this.moveItem}
-            deleteItem={this.deleteItem}
+            moveItem   = {this.moveItem}
+            deleteItem = {this.deleteItem}
+            index      = {index}
         />
     }
 
-    getIndex(event) {
-        let target  = event.target.parentElement.parentElement;
-        let parent  = event.target.parentElement.parentElement.parentElement;
-        return getIndexInNodes(target, parent);
-    }
-
-    moveItem(event, direction) {
-        let index   = this.getIndex(event)
+    moveItem(index, direction) {
         let copy    = this.props.resume; 
         copy.experience = moveTo(index, index + direction, copy.experience);
         this.props.updateResume(copy);
